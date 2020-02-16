@@ -37,7 +37,7 @@ export const LevelDefaults: {
 
 export const DEFAULT_LEVEL = LevelDefaults.TRACE;
 
-export class Logger {
+export default class Logger {
   private logLevel: number = DEFAULT_LEVEL;
 
   private log(

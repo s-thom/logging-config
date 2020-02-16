@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "devDependencies": {
+    "@types/jest": "^25.1.2",
     "@typescript-eslint/eslint-plugin": "^2.19.2",
     "@typescript-eslint/parser": "^2.19.2",
     "babel-eslint": "^10.0.3",
@@ -12,11 +13,18 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "jest": "^25.1.0",
+    "jest-mock-console": "^1.0.0",
     "lerna": "^3.20.2",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "ts-jest": "^25.2.0"
   },
   "dependencies": {
     "@types/node": "^13.7.1",
     "typescript": "^3.7.5"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:dev": "jest --watch"
   }
 }
