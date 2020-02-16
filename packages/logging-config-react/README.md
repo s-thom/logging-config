@@ -8,6 +8,8 @@ Make sure to look at the original module: [https://www.npmjs.com/package/@sthom/
 
 ## Usage
 
+All exports from `@sthom/logging-config` are re-exported in `@sthom/logging-config-react`, so you don't need both in your dependencies.
+
 Basic example:
 
 ```ts
@@ -32,8 +34,10 @@ logger.info("Hello world!"); // Logs: [MyComponent] Hello world!
 Configuration using context:
 
 ```tsx
-import { LoggingConfiguration } from "@sthom/logging-config";
-import { LoggingConfigurationContext } from "@sthom/logging-config-react";
+import {
+  LoggingConfiguration,
+  LoggingConfigurationContext
+} from "@sthom/logging-config-react";
 
 const config = new LoggingConfiguration("ERROR");
 

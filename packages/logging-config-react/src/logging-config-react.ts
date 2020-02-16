@@ -26,3 +26,13 @@ export default function useLogger(tag?: string, config?: LoggingConfiguration) {
 
   return useMemo(() => new Logger(tag, configToUse), [tag, configToUse]);
 }
+
+// Re-exports
+export { Logger };
+export {
+  LogLevels,
+  LevelDefaults,
+  DEFAULT_LEVEL,
+  LoggingConfiguration,
+  DEFAULT_CONFIGURATION
+} from "@sthom/logging-config";
