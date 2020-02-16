@@ -154,6 +154,29 @@ export class LoggingConfiguration {
  */
 export const DEFAULT_CONFIGURATION = new LoggingConfiguration();
 
+type Tag = string | (() => void) | { name: string } | undefined;
+
+function isTag(tag: any): tag is Tag {
+  // Basic typeof check
+  switch (typeof tag) {
+    case "string":
+    case "function":
+    case "undefined":
+      return true;
+  }
+
+  // Get rid of null (also false and 0, but that doesn't matter)
+  if (!tag) {
+    return false;
+  }
+
+  if (typeof tag.name === "string") {
+    return true;
+  }
+
+  return false;
+}
+
 /**
  * Main entrypoint into the library
  */
@@ -172,21 +195,28 @@ export default class Logger {
    * @param tag Tag for this Logger
    * @param config Configuration for this Logger
    */
-  constructor(tag?: string);
+  constructor(tag?: string | { name: string } | (() => void));
   constructor(config: LoggingConfiguration);
-  constructor(tag: string, config?: LoggingConfiguration);
   constructor(
-    tag?: string | LoggingConfiguration,
+    tag: string | { name: string } | (() => void),
+    config?: LoggingConfiguration
+  );
+  constructor(
+    tag?: string | { name: string } | LoggingConfiguration,
     config: LoggingConfiguration = DEFAULT_CONFIGURATION
   ) {
     let actualTag: string | undefined;
     let actualConfig: LoggingConfiguration;
 
-    if (typeof tag === "object") {
-      actualConfig = tag;
-    } else {
-      actualTag = tag;
+    if (isTag(tag)) {
+      if (typeof tag === "object" || typeof tag === "function") {
+        actualTag = tag.name;
+      } else {
+        actualTag = tag;
+      }
       actualConfig = config;
+    } else {
+      actualConfig = tag;
     }
 
     this.tag = actualTag;

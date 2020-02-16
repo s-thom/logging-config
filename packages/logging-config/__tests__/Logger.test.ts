@@ -173,3 +173,29 @@ test("Logger adds the tag when given a tag and a configuration", () => {
   expect(console.log).toBeCalledTimes(1);
   expect(console.log).toHaveBeenLastCalledWith("[Tag]", "test");
 });
+
+test("Logger accepts functions as a tag", () => {
+  class MyClass {}
+
+  const config = new LoggingConfiguration();
+  const logger = new Logger(MyClass, config);
+
+  expect(console.log).toBeCalledTimes(0);
+
+  logger.info("test");
+
+  expect(console.log).toBeCalledTimes(1);
+  expect(console.log).toHaveBeenLastCalledWith("[MyClass]", "test");
+});
+
+test("Logger accepts objects as a tag", () => {
+  const config = new LoggingConfiguration();
+  const logger = new Logger({ name: "Tag" }, config);
+
+  expect(console.log).toBeCalledTimes(0);
+
+  logger.info("test");
+
+  expect(console.log).toBeCalledTimes(1);
+  expect(console.log).toHaveBeenLastCalledWith("[Tag]", "test");
+});

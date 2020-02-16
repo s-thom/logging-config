@@ -18,9 +18,17 @@ export const LoggingConfigurationContext = loggerContext.Provider;
  * @param tag Tag for this logger
  * @param config Configuration object for this logger
  */
-export default function useLogger(tag?: string);
-export default function useLogger(tag?: string, config?: LoggingConfiguration);
-export default function useLogger(tag?: string, config?: LoggingConfiguration) {
+export default function useLogger(
+  tag?: string | { name: string } | (() => void)
+);
+export default function useLogger(
+  tag?: string | { name: string } | (() => void),
+  config?: LoggingConfiguration
+);
+export default function useLogger(
+  tag?: string | { name: string } | (() => void),
+  config?: LoggingConfiguration
+) {
   const contextConfig = useContext(loggerContext);
   const configToUse = config ?? contextConfig;
 
