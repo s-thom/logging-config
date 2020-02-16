@@ -28,8 +28,9 @@ export enum LogLevels {
   FATAL = 32
 }
 
-type LevelName = keyof typeof LogLevels;
-
+/**
+ * Pre-defined log levels for convenience
+ */
 export enum LevelDefaults {
   /**
    * No messages will be logged
@@ -162,6 +163,12 @@ export default class Logger {
     this.config = config;
   }
 
+  /**
+   * Checks to see if a message should be logged, and if so log it
+   * @param level Log level to log at. Used to determine whether this message should be logged
+   * @param verb Method on the `console` object to use
+   * @param args Data to log
+   */
   private log(
     level: LogLevels,
     verb: "error" | "warn" | "log" | "debug",
