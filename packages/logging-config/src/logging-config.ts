@@ -144,7 +144,7 @@ export class LoggingConfiguration {
 /**
  * Default configuration for all Loggers
  */
-export const DEFAULT_LOGGER_CONFIGURATION = new LoggingConfiguration();
+export const DEFAULT_CONFIGURATION = new LoggingConfiguration();
 
 /**
  * Main entrypoint into the library
@@ -159,7 +159,7 @@ export default class Logger {
    * Create a new instance of Logger
    * @param config Configuration for this Logger
    */
-  constructor(config: LoggingConfiguration = DEFAULT_LOGGER_CONFIGURATION) {
+  constructor(config: LoggingConfiguration = DEFAULT_CONFIGURATION) {
     this.config = config;
   }
 
