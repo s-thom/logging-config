@@ -5,24 +5,26 @@ on: [push, create]
 jobs:
   test:
     name: Test
-    if: github.event == 'push' && 
+    if: github.event == 'push' &&
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [12.x]
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - name: Lerna bootstrap
-      run: npx lerna bootstrap
-    - name: Lerna run test
-      run: npx lerna run test
-      env:
-        CI: true
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - name: Lerna bootstrap
+        run: npx lerna bootstrap
+      - name: Lerna run tsc
+        run: npx lerna run tsc
+      - name: Lerna run test
+        run: npx lerna run test
+        env:
+          CI: true
   publish:
     name: Publish
     if: github.event == 'create'
@@ -31,15 +33,15 @@ jobs:
       matrix:
         node-version: [12.x]
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - name: Lerna bootstrap
-      run: npx lerna bootstrap
-    - name: Lerna publish
-      run: npx lerna publish
-    
-    
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - name: Lerna bootstrap
+        run: npx lerna bootstrap
+      - name: Lerna run tsc
+        run: npx lerna run tsc
+      - name: Lerna publish
+        run: npx lerna publish --yes
