@@ -1,0 +1,32 @@
+{
+  "name": "@sthom/logging-config-react",
+  "version": "1.0.1",
+  "description": "More configurable logging for Javascript/Typescript",
+  "author": "Stuart Thomson <me@sthom.kiwi>",
+  "homepage": "https://github.com/s-thom/logging-config#readme",
+  "license": "MIT",
+  "main": "lib/logging-config-react.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/s-thom/logging-config.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/s-thom/logging-config/issues"
+  },
+  "dependencies": {
+    "react": "^16.12.0"
+  }
+}
