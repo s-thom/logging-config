@@ -19,6 +19,16 @@ const logger = new Logger();
 logger.info("Hello world!");
 ```
 
+With a tag at the start:
+
+```ts
+import Logger from "@sthom/logging-config";
+
+const logger = new Logger("MyFile");
+
+logger.info("Hello world!"); // Logs: [MyFile] Hello world!
+```
+
 Only error and fatal messages:
 
 ```ts

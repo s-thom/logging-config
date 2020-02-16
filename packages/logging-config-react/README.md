@@ -19,15 +19,33 @@ const logger = useLogger();
 logger.info("Hello world!");
 ```
 
+With a tag at the start:
+
+```ts
+import Logger from "@sthom/logging-config";
+
+const logger = useLogger("MyComponent");
+
+logger.info("Hello world!"); // Logs: [MyComponent] Hello world!
+```
+
 Configuration using context:
 
 ```tsx
 import { LoggingConfiguration } from "@sthom/logging-config";
 import { LoggingConfigurationContext } from "@sthom/logging-config-react";
 
-<LoggingConfigurationContext value={new LoggingConfiguration("ERROR")}>
+const config = new LoggingConfiguration("ERROR");
+
+// In your component
+<LoggingConfigurationContext value={config}>
   {/* Rest of your app */}
 </LoggingConfigurationContext>;
+
+// If your log level changes at run-time, you'll want to memoise the config object.
+// This is just a measure to prevent unnecessary re-renders of your app.
+const level = /* your logic */;
+const config = useMemo(() => new LoggingConfiguration(level), [level]);
 ```
 
 ## Log levels
