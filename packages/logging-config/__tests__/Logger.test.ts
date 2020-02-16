@@ -150,3 +150,26 @@ test("The log level is changed to the default when an unknown error level name i
 
   expect(console.log).toBeCalledTimes(2);
 });
+
+test("Logger adds the tag when given a tag", () => {
+  const logger = new Logger("Tag");
+
+  expect(console.log).toBeCalledTimes(0);
+
+  logger.info("test");
+
+  expect(console.log).toBeCalledTimes(1);
+  expect(console.log).toHaveBeenLastCalledWith("[Tag]", "test");
+});
+
+test("Logger adds the tag when given a tag and a configuration", () => {
+  const config = new LoggingConfiguration();
+  const logger = new Logger("Tag", config);
+
+  expect(console.log).toBeCalledTimes(0);
+
+  logger.info("test");
+
+  expect(console.log).toBeCalledTimes(1);
+  expect(console.log).toHaveBeenLastCalledWith("[Tag]", "test");
+});

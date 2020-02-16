@@ -162,13 +162,35 @@ export default class Logger {
    * Configuration of this Logger
    */
   private readonly config: LoggingConfiguration;
+  /**
+   * Tag to add as first parameter to all messages logged by this Logger
+   */
+  private readonly tag?: string;
 
   /**
    * Create a new instance of Logger
+   * @param tag Tag for this Logger
    * @param config Configuration for this Logger
    */
-  constructor(config: LoggingConfiguration = DEFAULT_CONFIGURATION) {
-    this.config = config;
+  constructor(tag?: string);
+  constructor(config: LoggingConfiguration);
+  constructor(tag: string, config?: LoggingConfiguration);
+  constructor(
+    tag?: string | LoggingConfiguration,
+    config: LoggingConfiguration = DEFAULT_CONFIGURATION
+  ) {
+    let actualTag: string | undefined;
+    let actualConfig: LoggingConfiguration;
+
+    if (typeof tag === "object") {
+      actualConfig = tag;
+    } else {
+      actualTag = tag;
+      actualConfig = config;
+    }
+
+    this.tag = actualTag;
+    this.config = actualConfig;
   }
 
   /**
@@ -183,7 +205,12 @@ export default class Logger {
     args: any[]
   ) {
     if (this.config.isLevelEnabled(level)) {
-      console[verb](...args);
+      const additionalData = [];
+      if (this.tag !== undefined) {
+        additionalData.push(`[${this.tag}]`);
+      }
+
+      console[verb](...additionalData, ...args);
     }
   }
 
