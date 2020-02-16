@@ -4,6 +4,8 @@ Logging configuration for Javascript and Typescript.
 
 This exists because the only way to stop my brain from shouting "you need to make a terrible logging library" is to make a terrible logging library.
 
+Using this with React? Have a look at [https://www.npmjs.com/package/@sthom/logging-config-react](https://www.npmjs.com/package/@sthom/logging-config-react).
+
 ## Usage
 
 Basic example:
