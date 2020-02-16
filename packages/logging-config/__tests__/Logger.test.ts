@@ -1,5 +1,8 @@
 import mockConsole from "jest-mock-console";
-import Logger, { LoggingConfiguration } from "../src/logging-config";
+import Logger, {
+  LevelDefaults,
+  LoggingConfiguration
+} from "../src/logging-config";
 
 const loggerConfiguration = new LoggingConfiguration();
 let mockResetFunction;
@@ -74,4 +77,76 @@ test("Logger logs at fatal", () => {
 
   expect(console.error).toBeCalledTimes(1);
   expect(console.error).toHaveBeenLastCalledWith("test");
+});
+
+test("Changing the log level affect what is logged", () => {
+  const config = new LoggingConfiguration();
+  const logger = new Logger(config);
+
+  expect(console.log).toBeCalledTimes(0);
+
+  logger.info("test");
+
+  expect(console.log).toBeCalledTimes(1);
+  expect(console.log).toHaveBeenLastCalledWith("test");
+
+  config.setLogLevel(LevelDefaults.ERROR);
+
+  logger.info("test");
+
+  expect(console.log).toBeCalledTimes(1);
+});
+
+test("The log level can be changed with a number", () => {
+  const config = new LoggingConfiguration();
+  const logger = new Logger(config);
+
+  expect(console.log).toBeCalledTimes(0);
+
+  logger.info("test");
+
+  expect(console.log).toBeCalledTimes(1);
+  expect(console.log).toHaveBeenLastCalledWith("test");
+
+  config.setLogLevel(0);
+
+  logger.info("test");
+
+  expect(console.log).toBeCalledTimes(1);
+});
+
+test("The log level can be changed with the name of a log level", () => {
+  const config = new LoggingConfiguration();
+  const logger = new Logger(config);
+
+  expect(console.log).toBeCalledTimes(0);
+
+  logger.info("test");
+
+  expect(console.log).toBeCalledTimes(1);
+  expect(console.log).toHaveBeenLastCalledWith("test");
+
+  config.setLogLevel("ERROR");
+
+  logger.info("test");
+
+  expect(console.log).toBeCalledTimes(1);
+});
+
+test("The log level is changed to the default when an unknown error level name is given", () => {
+  const config = new LoggingConfiguration();
+  const logger = new Logger(config);
+
+  expect(console.log).toBeCalledTimes(0);
+
+  logger.info("test");
+
+  expect(console.log).toBeCalledTimes(1);
+  expect(console.log).toHaveBeenLastCalledWith("test");
+
+  config.setLogLevel("something unknown" as any);
+
+  logger.info("test");
+
+  expect(console.log).toBeCalledTimes(2);
 });

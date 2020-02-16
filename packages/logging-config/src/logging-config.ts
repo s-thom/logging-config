@@ -136,8 +136,16 @@ export class LoggingConfiguration {
    * Set the log level configuration
    * @param level Level to set the configuration to
    */
-  setLogLevel(level: LevelDefaults | number) {
-    this.logLevel = level;
+  setLogLevel(level: LevelDefaults | number | keyof typeof LevelDefaults) {
+    if (typeof level === "string") {
+      if (LevelDefaults[level] !== undefined) {
+        this.logLevel = LevelDefaults[level];
+      } else {
+        this.logLevel = DEFAULT_LEVEL;
+      }
+    } else {
+      this.logLevel = level;
+    }
   }
 }
 

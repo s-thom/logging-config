@@ -1,7 +1,7 @@
 {
   "name": "@sthom/logging-config",
   "version": "1.0.1",
-  "description": "> TODO: description",
+  "description": "More configurable logging for Javascript/Typescript",
   "author": "Stuart Thomson <me@sthom.kiwi>",
   "homepage": "https://github.com/s-thom/logging-config#readme",
   "license": "MIT",
