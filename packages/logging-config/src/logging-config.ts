@@ -37,25 +37,39 @@ export const LevelDefaults: {
 
 export const DEFAULT_LEVEL = LevelDefaults.TRACE;
 
+export class LoggingConfiguration {
+  private logLevel: number;
+
+  constructor(level = DEFAULT_LEVEL) {
+    this.logLevel = level;
+  }
+
+  isLevelEnabled(level: number): boolean {
+    return Boolean(level & this.logLevel);
+  }
+
+  setLogLevel(level: number) {
+    this.logLevel = level;
+  }
+}
+
+export const DEFAULT_LOGGER_CONFIGURATION = new LoggingConfiguration();
+
 export default class Logger {
-  private logLevel: number = DEFAULT_LEVEL;
+  private readonly config: LoggingConfiguration;
+
+  constructor(config: LoggingConfiguration = DEFAULT_LOGGER_CONFIGURATION) {
+    this.config = config;
+  }
 
   private log(
     level: LogLevels,
     verb: "error" | "warn" | "log" | "debug",
     args: any[]
   ) {
-    if (this.isLevelEnabled(level)) {
+    if (this.config.isLevelEnabled(level)) {
       console[verb](...args);
     }
-  }
-
-  setLogLevel(level: number) {
-    this.logLevel = level;
-  }
-
-  isLevelEnabled(level: number): boolean {
-    return Boolean(level & this.logLevel);
   }
 
   trace(...args) {
