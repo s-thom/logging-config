@@ -25,4 +25,4 @@ jobs:
       - name: Compile
         run: npx lerna run tsc
       - name: Publish
-        run: npx lerna publish --yes
+        run: npx lerna publish from-git --yes
