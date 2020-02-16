@@ -21,7 +21,8 @@
     "url": "git+https://github.com/s-thom/logging-config.git"
   },
   "scripts": {
-    "tsc": "tsc",
+    "prepare": "npm run build",
+    "build": "tsc",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {

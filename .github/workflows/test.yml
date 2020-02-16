@@ -20,7 +20,7 @@ jobs:
       - name: Bootstrap
         run: npx lerna bootstrap
       - name: Compile
-        run: npx lerna run tsc
+        run: npx lerna run build
       - name: Run tests
         run: npm test
         env:
