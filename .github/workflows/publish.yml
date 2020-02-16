@@ -26,3 +26,5 @@ jobs:
         run: npx lerna run tsc
       - name: Publish
         run: npx lerna publish from-git --yes
+        env:
+          NPM_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
