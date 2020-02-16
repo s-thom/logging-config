@@ -5,7 +5,7 @@ on: [push, create]
 jobs:
   test:
     name: Test
-    if: github.event == 'push'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -27,7 +27,7 @@ jobs:
           CI: true
   publish:
     name: Publish
-    if: github.event == 'create' && startsWith('$GITHUB_REF', 'v')
+    if: github.event_name == 'create' && startsWith('$GITHUB_REF', 'v')
     runs-on: ubuntu-latest
     strategy:
       matrix:
