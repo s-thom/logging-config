@@ -27,7 +27,7 @@ jobs:
           CI: true
   publish:
     name: Publish
-    if: github.event == 'create' && startsWith($GITHUB_REF, 'v')
+    if: github.event == 'create' && startsWith('$GITHUB_REF', 'v')
     runs-on: ubuntu-latest
     strategy:
       matrix:
