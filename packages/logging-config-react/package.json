@@ -1,6 +1,6 @@
 {
   "name": "@sthom/logging-config-react",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "More configurable logging for Javascript/Typescript",
   "author": "Stuart Thomson <me@sthom.kiwi>",
   "homepage": "https://github.com/s-thom/logging-config#readme",
