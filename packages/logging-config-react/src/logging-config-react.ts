@@ -20,15 +20,15 @@ export const LoggingConfigurationContext = loggerContext.Provider;
  */
 export default function useLogger(
   tag?: string | { name: string } | (() => void)
-);
+): Logger;
 export default function useLogger(
   tag?: string | { name: string } | (() => void),
   config?: LoggingConfiguration
-);
+): Logger;
 export default function useLogger(
   tag?: string | { name: string } | (() => void),
   config?: LoggingConfiguration
-) {
+): Logger {
   const contextConfig = useContext(loggerContext);
   const configToUse = config ?? contextConfig;
 
